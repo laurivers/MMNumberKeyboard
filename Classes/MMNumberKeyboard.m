@@ -112,7 +112,7 @@ static const CGFloat MMNumberKeyboardPadSpacing = 8.0f;
         buttonFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:28.0f];
     }
     
-    UIFont *doneButtonFont = [UIFont systemFontOfSize:17.0f];
+//    UIFont *doneButtonFont = [UIFont systemFontOfSize:17.0f];
     
     for (MMNumberKeyboardButton key = numberMin; key < numberMax; key++) {
         UIButton *button = [_MMNumberKeyboardButton keyboardButtonWithStyle:MMNumberKeyboardButtonStyleWhite];
@@ -125,7 +125,7 @@ static const CGFloat MMNumberKeyboardPadSpacing = 8.0f;
     }
     
     UIImage *backspaceImage = [self.class _keyboardImageNamed:@"MMNumberKeyboardDeleteKey.png"];
-    UIImage *dismissImage = [self.class _keyboardImageNamed:@"MMNumberKeyboardDismissKey.png"];
+//    UIImage *dismissImage = [self.class _keyboardImageNamed:@"MMNumberKeyboardDismissKey.png"];
     
     UIButton *backspaceButton = [_MMNumberKeyboardButton keyboardButtonWithStyle:MMNumberKeyboardButtonStyleGray];
     [backspaceButton setImage:[backspaceImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
@@ -139,18 +139,19 @@ static const CGFloat MMNumberKeyboardPadSpacing = 8.0f;
     [buttonDictionary setObject:specialButton forKey:@(MMNumberKeyboardButtonSpecial)];
     
     UIButton *doneButton = [_MMNumberKeyboardButton keyboardButtonWithStyle:MMNumberKeyboardButtonStyleDone];
-    [doneButton.titleLabel setFont:doneButtonFont];
+    
     [doneButton setTitle:UIKitLocalizedString(@"Done") forState:UIControlStateNormal];
+    [doneButton setImage:[self.class _keyboardImageNamed:@"MMNumberKeyboardDismissKey.png"] forState:UIControlStateNormal];
     
     [buttonDictionary setObject:doneButton forKey:@(MMNumberKeyboardButtonDone)];
     
-    UIButton *decimalPointButton = [_MMNumberKeyboardButton keyboardButtonWithStyle:MMNumberKeyboardButtonStyleWhite];
-    
-    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
-    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
-    [decimalPointButton setTitle:decimalSeparator ?: @"." forState:UIControlStateNormal];
-    
-    [buttonDictionary setObject:decimalPointButton forKey:@(MMNumberKeyboardButtonDecimalPoint)];
+//    UIButton *decimalPointButton = [_MMNumberKeyboardButton keyboardButtonWithStyle:MMNumberKeyboardButtonStyleWhite];
+//    
+//    NSLocale *locale = self.locale ?: [NSLocale currentLocale];
+//    NSString *decimalSeparator = [locale objectForKey:NSLocaleDecimalSeparator];
+//    [decimalPointButton setTitle:decimalSeparator ?: @"." forState:UIControlStateNormal];
+//    
+//    [buttonDictionary setObject:decimalPointButton forKey:@(MMNumberKeyboardButtonDecimalPoint)];
     
     for (UIButton *button in buttonDictionary.objectEnumerator) {
         [button setExclusiveTouch:YES];
@@ -169,13 +170,13 @@ static const CGFloat MMNumberKeyboardPadSpacing = 8.0f;
     self.separatorViews = [NSMutableArray array];
     
     // Add default action.
-    [self configureSpecialKeyWithImage:dismissImage target:self action:@selector(_dismissKeyboard:)];
+//    [self configureSpecialKeyWithImage:dismissImage target:self action:@selector(_dismissKeyboard:)];
     
     // Add default return key title.
     [self setReturnKeyTitle:[self defaultReturnKeyTitle]];
     
     // Add default return key style.
-    [self setReturnKeyButtonStyle:MMNumberKeyboardButtonStyleDone];
+    [self setReturnKeyButtonStyle:MMNumberKeyboardButtonStyleGray];
     
     // Size to fit.
     [self sizeToFit];
@@ -409,7 +410,7 @@ static const CGFloat MMNumberKeyboardPadSpacing = 8.0f;
 
 - (NSString *)defaultReturnKeyTitle
 {
-    return UIKitLocalizedString(@"Done");
+    return @"";
 }
 
 - (void)setReturnKeyButtonStyle:(MMNumberKeyboardButtonStyle)style
